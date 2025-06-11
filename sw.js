@@ -1,4 +1,4 @@
-const CACHE_NAME = 'app-cache-v1';
+const CACHE_NAME = 'app-cache-v2';
 
 const PAGES = [
   './index.html',
@@ -11,6 +11,7 @@ const PAGES = [
 const ASSETS = [
   './',
   ...PAGES,
+  './offline.html',
   './manifest.json',
   './src/main.js',
   './src/styles.css',
@@ -34,6 +35,15 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const { request } = event;
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .catch(() =>
+          caches.match(request).then(resp => resp || caches.match('./offline.html'))
+        )
+    );
+    return;
+  }
   if (request.destination === 'style' || request.destination === 'script') {
     event.respondWith(
       caches.match(request).then(cachedResponse => {
