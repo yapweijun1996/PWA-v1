@@ -22,3 +22,50 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+
+function throttle(fn, delay) {
+  let last = 0;
+  return (...args) => {
+    const now = Date.now();
+    if (now - last >= delay) {
+      last = now;
+      fn(...args);
+    }
+  };
+}
+
+function initScrollVisibility() {
+  const topbar = document.getElementById('topbar');
+  const bottombar = document.getElementById('bottombar');
+  if (!topbar || !bottombar) return;
+
+  let lastY = window.scrollY;
+  let accumulated = 0;
+  const THRESHOLD = 50;
+
+  const onScroll = throttle(() => {
+    const currentY = window.scrollY;
+    const diff = currentY - lastY;
+    lastY = currentY;
+
+    if (Math.sign(diff) !== Math.sign(accumulated)) {
+      accumulated = diff;
+    } else {
+      accumulated += diff;
+    }
+
+    if (accumulated > THRESHOLD) {
+      topbar.classList.add('hidden');
+      bottombar.classList.add('hidden');
+      accumulated = 0;
+    } else if (accumulated < -THRESHOLD) {
+      topbar.classList.remove('hidden');
+      bottombar.classList.remove('hidden');
+      accumulated = 0;
+    }
+  }, 100);
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+}
+
+window.addEventListener('DOMContentLoaded', initScrollVisibility);
