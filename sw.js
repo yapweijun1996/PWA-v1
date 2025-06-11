@@ -11,7 +11,10 @@ const PAGES = [
 const ASSETS = [
   './',
   ...PAGES,
-  './manifest.json'
+  './manifest.json',
+  './src/main.js',
+  './src/styles.css',
+  './icon-192.png'
 ];
 
 self.addEventListener('install', (event) => {
