@@ -19,10 +19,10 @@ body {
   bottom: 0;
 }
 
-.hidden-top {
+#topbar.hidden {
   transform: translateY(-100%);
 }
 
-.hidden-bottom {
+#bottombar.hidden {
   transform: translateY(100%);
 }
