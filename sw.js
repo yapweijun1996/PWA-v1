@@ -1,11 +1,16 @@
 const CACHE_NAME = 'app-cache-v1';
-const ASSETS = [
-  './',
+
+const PAGES = [
   './index.html',
   './page2.html',
   './page3.html',
   './page4.html',
-  './page5.html',
+  './page5.html'
+];
+
+const ASSETS = [
+  './',
+  ...PAGES,
   './manifest.json'
 ];
 
