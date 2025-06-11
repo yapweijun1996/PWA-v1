@@ -68,4 +68,14 @@ function initScrollVisibility() {
   window.addEventListener('scroll', onScroll, { passive: true });
 }
 
-window.addEventListener('DOMContentLoaded', initScrollVisibility);
+function setStatusReady() {
+  const statusEl = document.getElementById('status');
+  if (statusEl) {
+    statusEl.textContent = 'Ready';
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  initScrollVisibility();
+  setStatusReady();
+});
