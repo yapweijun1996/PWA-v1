@@ -1,3 +1,5 @@
+import { throttle } from './throttle.js';
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').then(reg => {
@@ -23,16 +25,6 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-function throttle(fn, delay) {
-  let last = 0;
-  return (...args) => {
-    const now = Date.now();
-    if (now - last >= delay) {
-      last = now;
-      fn(...args);
-    }
-  };
-}
 
 function initScrollVisibility() {
   const topbar = document.getElementById('topbar');

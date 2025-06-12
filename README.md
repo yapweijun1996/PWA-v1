@@ -13,6 +13,14 @@ npm run dev
 
 The site will be available at the URL printed in the console.
 
+## Testing
+
+Run the test suite with:
+
+```bash
+npm test
+```
+
 ## Building and Previewing
 
 Create a production build:

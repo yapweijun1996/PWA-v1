@@ -14,6 +14,7 @@ const ASSETS = [
   './offline.html',
   './manifest.json',
   './src/main.js',
+  './src/throttle.js',
   './src/styles.css',
   './icon-192.png'
 ];
